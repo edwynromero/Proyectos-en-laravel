@@ -7,7 +7,8 @@
             <h2 class="page-header">
 			Comprobantes
 			</h2>
-		<table class="table-striped">
+			<a class="btn btn-default btn-lg btn-block" href="{{url('invoice/add')}}" >Nuevo Comprobante</a>
+		<table class="table table-striped">
 			<thead>
 				
 
@@ -28,7 +29,7 @@
 			$iva = $total - $subTotal;
 			?>
 			<tr>
-				<td class="text-right">{{$i}}</td>
+				<td>Client{{$i}}</td>
 				<td class="text-right">{{number_format($iva, 2)}}</td>
 				<td class="text-right">{{number_format($subTotal, 2)}}</td>
 				<td class="text-right">{{number_format($total, 2)}}</td>

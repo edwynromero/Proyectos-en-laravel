@@ -12,4 +12,10 @@ class InvoiceController extends Controller
 	{
 		return view('invoice.index');
 	}
+
+	public function add()
+	{
+		return view('invoice.add');
+	}
+
 }
