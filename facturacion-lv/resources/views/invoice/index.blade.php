@@ -13,15 +13,32 @@
 
 			<tr>
 			<th>Clients</th>	
-			<th style="width: 100">Iva</th>
-			<th style="width: 160">Sub Total</th>
-			<th style="width: 160">Total</th>
-			<th style="width: 100">Creado</th>						
+			<th style="width: 100px;" class="text-right">Iva</th>
+			<th style="width: 160px;" class="text-right">Sub Total</th>
+			<th style="width: 160px;" class="text-right">Total</th>
+			<th style="width: 100px;" class="text-right">Creado</th>						
 			</tr>
-%tr.test
-	%p
+
 			</thead>
-		
+		<tbody>
+			<?php for ($i=1; $i <= 10 ; $i++): ?>
+			<?php 
+			$total = 1180 * $i;
+			$subTotal = $total /1.18;
+			$iva = $total - $subTotal;
+			?>
+			<tr>
+				<td class="text-right">{{$i}}</td>
+				<td class="text-right">{{number_format($iva, 2)}}</td>
+				<td class="text-right">{{number_format($subTotal, 2)}}</td>
+				<td class="text-right">{{number_format($total, 2)}}</td>
+				<td class="text-right">02-12-2017</td>
+				
+
+
+			</tr>
+		<?php endfor; ?>
+		</tbody>
 
 		</table>
             </div>
@@ -29,5 +46,5 @@
   
 
   </div>
-</div>
+
 @endsection
