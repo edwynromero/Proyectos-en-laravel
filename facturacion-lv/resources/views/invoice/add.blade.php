@@ -7,6 +7,7 @@
             <h2 class="page-header">
 			Nuevo Comprobante	
 			</h2>
+
 			<invoice></invoice>			
          </div>
      </div>
@@ -20,7 +21,6 @@
 <script>
 	$(document).ready(function(){
 		riot.mount('invoice');
-
 	})
 
 </script>
