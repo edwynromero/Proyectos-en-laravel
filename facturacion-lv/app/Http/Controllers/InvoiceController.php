@@ -6,8 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Client;
+
 class InvoiceController extends Controller
 {
+	private $client = null;
+
+	public function __CONSTRUCT()
+	{
+		$this->client = new Client();
+	}
+
 	public function index()
 	{
 		return view('invoice.index');
@@ -17,5 +26,12 @@ class InvoiceController extends Controller
 	{
 		return view('invoice.add');
 	}
+
+		public function findClient(Request $req)
+	{
+		return $this->client
+					->findByName($req->input('a'));
+	}
+
 
 }

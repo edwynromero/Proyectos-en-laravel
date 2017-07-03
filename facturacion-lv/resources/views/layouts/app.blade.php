@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="{{ asset('bower_components/EasyAutocomplete/dist/easy-autocomplete.min.css') }}" rel="stylesheet"> 
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
@@ -82,8 +83,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="{{asset('bower_components/riot/riot.min.js')}}"></script>
     <script src="{{asset('bower_components/riot/riot-compiler.min.js')}}"></script>
+    <script src="{{asset('bower_components/EasyAutocomplete/dist/jquery.easy-autocomplete.min.js')}}"></script>
 
     
 @yield('bottom')
+<script>
+function baseUrl (url) {
+    return '{{url('')}}/'+ url; 
+}
+</script>
 </body>
 </html>
