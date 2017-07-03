@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request,
+    App\Repositories\ClientRepository,
+    App\Http\Requests;
 
-use App\Http\Requests;
-
-use App\Client;
 
 class InvoiceController extends Controller
 {
-	private $client = null;
+	private $clientRepo = null;
 
-	public function __CONSTRUCT()
+	public function __construct(ClientRepository $clientRepo)
 	{
-		$this->client = new Client();
+		$this->clientRepo = $clientRepo;
 	}
 
 	public function index()
@@ -29,7 +28,7 @@ class InvoiceController extends Controller
 
 		public function findClient(Request $req)
 	{
-		return $this->client
+		return $this->clientRepo
 					->findByName($req->input('a'));
 	}
 
