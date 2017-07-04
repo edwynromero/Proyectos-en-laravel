@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request,
     App\Repositories\ClientRepository,
+    App\Repositories\ProductRepository,
     App\Http\Requests;
 
 
 class InvoiceController extends Controller
 {
 	private $clientRepo = null;
+	private $productRepo = null;
 
-	public function __construct(ClientRepository $clientRepo)
+	public function __construct(
+		ClientRepository $clientRepo,
+		ProductRepository $productRepo
+		)
 	{
 		$this->clientRepo = $clientRepo;
+		$this->productRepo = $productRepo;
 	}
 
 	public function index()
@@ -32,5 +38,10 @@ class InvoiceController extends Controller
 					->findByName($req->input('a'));
 	}
 
+	public function findProduct(Request $req)
+	{
+		return $this->productRepo
+					->findByName($req->input('a'));
+	}
 
 }

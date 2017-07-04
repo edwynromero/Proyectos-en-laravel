@@ -23,7 +23,7 @@
         <div class="col-xs-2">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">S/.</span>
-                <input class="form-control" type="text" placeholder="Precio" value="{price}" readonly />
+                <input class="form-control" type="text" placeholder="Precio" value="{price}" />
             </div>
         </div>
         <div class="col-xs-1">
@@ -76,6 +76,7 @@
            self.on('mount', function()  {
 
            __clientAutocomplete();
+           __productAutocomplete();
            })
           function __clientAutocomplete(){
             var client = $("#client"),
@@ -99,6 +100,26 @@
             client.easyAutocomplete(options);
         }
         
+        function __productAutocomplete(){
+            var product = $("#product"),
+                options = {
+                url: function(q) {
+                    return baseUrl('invoice/findproduct?q=' + q);
+                },
+                getValue: 'name',
+                list: {
+                    onClickEvent: function() {
+                        var e = product.getSelectedItemData();
+                        self.product_id = e.id;
+                        self.price = e.price;
+
+                        self.update();
+                    }
+                }
+            };
+
+            product.easyAutocomplete(options);
+        }
     </script>
 
 </invoice>
