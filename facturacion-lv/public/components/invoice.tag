@@ -2,7 +2,7 @@
     <div class="well well-sm">
         <div class="row">
             <div class="col-xs-6">
-                <input id="client" class="form-control typeahead" type="text" placeholder="Cliente" />
+                <input id="client" class="form-control typeahead" type="text" placeholder="Cliente"  />
             </div>
             <div class="col-xs-2">
                 <input class="form-control" type="text" placeholder="Ruc" readonly value="{ruc}" />
@@ -23,11 +23,11 @@
         <div class="col-xs-2">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">S/.</span>
-                <input class="form-control" type="text" placeholder="Precio" value="{price}" />
+                <input class="form-control" type="text" placeholder="Precio" value="{price}" readonly />
             </div>
         </div>
         <div class="col-xs-1">
-            <button  class="btn btn-primary form-control" id="btn-agregar">
+            <button onclick={__addProductoToDetail} class="btn btn-primary form-control" id="btn-agregar">
                 <i class="glyphicon glyphicon-plus"></i>
             </button>
         </div>
@@ -73,11 +73,26 @@
     </table>
             <script>
            var self = this;
-           self.on('mount', function()  {
+           self.detail =[];
+
+           self.on('mount', function(){
 
            __clientAutocomplete();
            __productAutocomplete();
            })
+
+
+          __addProductoToDetail() {
+            self.detail.push({
+                id: self.product_id,
+                name: self.product.value,
+                quantity: parseFloat(self.quantity.value),
+                price: parseFloat(self.price),
+                total: parseFloat(self.price * self.quantity.value)
+            });
+          console.log(self.detail);
+
+           }
           function __clientAutocomplete(){
             var client = $("#client"),
                 options = {
