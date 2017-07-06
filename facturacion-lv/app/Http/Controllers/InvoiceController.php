@@ -21,6 +21,17 @@ class InvoiceController extends Controller
 		$this->clientRepo = $clientRepo;
 		$this->productRepo = $productRepo;
 	}
+	public function save(Request $req)
+	{
+		$data = (object) [
+	'iva' => $req->input('iva'),
+	'subTotal' => $req->input('subTotal'),
+	'total' => $req->input('total'),
+	'client_id' => $req->input('client_id'),
+	'detail' => $req->input('detail')
+	]; 
+	return $data;
+	}
 
 	public function index()
 	{

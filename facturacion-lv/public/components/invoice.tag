@@ -71,6 +71,7 @@
         </tr>
         </tfoot>
     </table>
+    <button onclick={__save} class="btn btn-default btn-lg btn-block">Guardar</button>
             <script>
            var self = this;
            self.detail =[];
@@ -102,6 +103,22 @@
             self.subTotal = parseFloat(total / 1.18);
             self.iva = parseFloat(total - self.subTotal); 
            }
+
+ __save() {
+            $.post(baseUrl('invoice/save'), {
+                client_id: self.client_id,
+                iva: self.iva,
+                subTotal: self.subTotal,
+                total: self.total,
+                detail: self.detail
+            }, function(r){
+                if(r.response) {
+                    window.location.href = baseUrl('invoice');
+                } else {
+                    alert('Ocurrio un error');
+                }
+            }, 'json')
+        }
 
           __addProductoToDetail() {
             self.detail.push({
