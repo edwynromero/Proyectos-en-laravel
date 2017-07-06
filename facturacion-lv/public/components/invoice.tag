@@ -40,47 +40,68 @@
         <tr>
             <th style="width:40px;"></th>
             <th>Producto</th>
-            <th style="width:100px;">Cantidad</th>
-            <th style="width:100px;">P.U</th>
-            <th style="width:100px;">Total</th>
+            <th style="width:100px;" class="text-right">Cantidad</th>
+            <th style="width:100px;" class="text-right">P.U</th>
+            <th style="width:100px;" class="text-right">Total</th>
         </tr>
         </thead>
         <tbody>
         <tr each={detail}>
             <td>
-                <button  class="btn btn-danger btn-xs btn-block">X</button>
+                <button onclick={__removeProductFromDetail}  class="btn btn-danger btn-xs btn-block">X</button>
             </td>
             <td>{name}</td>
             <td class="text-right">{quantity}</td>
-            <td class="text-right">$ </td>
-            <td class="text-right">$ </td>
+            <td class="text-right">${price} </td>
+            <td class="text-right">${total} </td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
             <td colspan="4" class="text-right"><b>IVA</b></td>
-            <td class="text-right">$ </td>
+            <td class="text-right" style="width:150px;">$ {iva.toFixed(2)} </td>
         </tr>
         <tr>
             <td colspan="4" class="text-right"><b>Sub Total</b></td>
-            <td class="text-right">$ </td>
+            <td class="text-right" style="width:150px;">$ {subTotal.toFixed(2)}</td>
         </tr>
         <tr>
-            <td colspan="4" class="text-right"><b>Total</b></td>
-            <td class="text-right"></td>
+            <td colspan="4" class="text-right" style="width:150px;"><b>Total</b></td>
+            <td class="text-right">$ {total.toFixed(2)}</td>
         </tr>
         </tfoot>
     </table>
             <script>
            var self = this;
            self.detail =[];
-
+           self.iva = 0;
+           self.subTotal = 0;
+           self.total = 0;
+           
            self.on('mount', function(){
 
            __clientAutocomplete();
            __productAutocomplete();
            })
 
+           __removeProductFromDetail(e) {
+            var item = e.item;
+            index = this.detail.indexOf(item);
+
+            this.detail.splice(index, 1);
+            __calculate();            
+           }
+
+           function __calculate() {
+            var total = 0;
+
+            self.detail.forEach(function(e){
+                total += e.total;
+            })
+            self.total = total;
+            self.subTotal = parseFloat(total / 1.18);
+            self.iva = parseFloat(total - self.subTotal); 
+           }
 
           __addProductoToDetail() {
             self.detail.push({
@@ -90,8 +111,12 @@
                 price: parseFloat(self.price),
                 total: parseFloat(self.price * self.quantity.value)
             });
-          console.log(self.detail);
+            self.product_id= 0;
+            self.product.value = '';
+            self.quantity.value = '';
+            self.price.value = '';
 
+            __calculate();
            }
           function __clientAutocomplete(){
             var client = $("#client"),
