@@ -104,8 +104,8 @@
             self.iva = parseFloat(total - self.subTotal); 
            }
 
- __save() {
-            $.post(baseUrl('invoice/save'), {
+            __save() {
+                 $.post(baseUrl('invoice/save'), {
                 client_id: self.client_id,
                 iva: self.iva,
                 subTotal: self.subTotal,
@@ -117,7 +117,10 @@
                 } else {
                     alert('Ocurrio un error');
                 }
+                
             }, 'json')
+               //console.log(self);
+
         }
 
           __addProductoToDetail() {

@@ -22,7 +22,7 @@ Route::get('/invoice', 'InvoiceController@index');
 Route::get('/invoice/add', 'InvoiceController@add');
 Route::get('/invoice/findclient', 'InvoiceController@findclient');
 Route::get('/invoice/findproduct', 'InvoiceController@findproduct');
-//Route::get('/invoice/save', 'InvoiceController@save');
+Route::post('/invoice/save', 'InvoiceController@save');
 
 
 
