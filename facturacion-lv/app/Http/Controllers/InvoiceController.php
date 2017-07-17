@@ -43,10 +43,10 @@ class InvoiceController extends Controller
 	'subTotal' => $req->input('subTotal'),
 	'total' => $req->input('total'),
 	'client_id' => $req->input('client_id'),
-	'detail' => $req->input('detail')
+	'detail' => []
 	]; 
 	foreach ($req->input('detail') as $d) {
-		$data->detail[] = [
+		$data->detail[] = (object)[
 		'product_id' => $d['id'],
 		'quantity' => $d['quantity'],
 		'unitPrice' => $d['price'],
@@ -55,7 +55,6 @@ class InvoiceController extends Controller
 	}
 	return $this->invoiceRepo->save($data);
 	}
-
 
 		public function findClient(Request $req)
 	{
